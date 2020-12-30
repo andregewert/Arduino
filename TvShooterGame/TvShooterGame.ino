@@ -65,8 +65,8 @@ struct Bullet {
     uint8_t state = STATE_INACTIVE;
 };
 
-byte gamestate = 0;
-byte nextGamestate = 0;
+byte gamestate = GAMESTATE_TITLE;
+byte nextGamestate = GAMESTATE_TITLE;
 TvGame game;
 AnalogStickController controller;
 
@@ -463,8 +463,8 @@ void loop() {
             // Draw the game state
             game.clearScreen();
             drawStatusText();
-            game.drawLine(0, 6, game.width, 6);
-            game.drawLine(0, game.height -1, game.width, game.height -1);
+            game.drawLine(0, 6, game.width -1, 6);
+            game.drawLine(0, game.height -1, game.width -1, game.height -1);
 
             // Player shots
             for (i = 0; i < MAX_SHOTS; i++) {

@@ -2,7 +2,6 @@
 #define SPRITES_H
 
 const unsigned char gfxExplosion1[] PROGMEM = {
-    8,8,
     B00000000,
     B00000100,
     B00101110,
@@ -14,7 +13,6 @@ const unsigned char gfxExplosion1[] PROGMEM = {
 };
 
 const unsigned char gfxExplosion2[] PROGMEM = {
-    8, 8,
     B00010010,
     B00100010,
     B01000000,
@@ -26,7 +24,6 @@ const unsigned char gfxExplosion2[] PROGMEM = {
 };
 
 const unsigned char gfxPlayer[] PROGMEM = {
-    8, 8,
     B00000000,
     B01111000,
     B11100100,
@@ -38,7 +35,6 @@ const unsigned char gfxPlayer[] PROGMEM = {
 };
 
 const unsigned char gfxPlayerB[] PROGMEM = {
-    8, 8,
     B01000000,
     B11111000,
     B01100100,
@@ -50,7 +46,6 @@ const unsigned char gfxPlayerB[] PROGMEM = {
 };
 
 const unsigned char gfxPlayerDown[] PROGMEM = {
-    8, 8,
     B00000000,
     B00111000,
     B01111000,
@@ -62,7 +57,6 @@ const unsigned char gfxPlayerDown[] PROGMEM = {
 };
 
 const unsigned char gfxPlayerUp[] PROGMEM = {
-    8, 8,
     B01111000,
     B11110100,
     B01110111,
@@ -74,7 +68,6 @@ const unsigned char gfxPlayerUp[] PROGMEM = {
 };
 
 const unsigned char gfxEnemy01a[] PROGMEM = {
-    8, 8,
     B00111100,
     B01000010,
     B01011001,
@@ -86,7 +79,6 @@ const unsigned char gfxEnemy01a[] PROGMEM = {
 };
 
 const unsigned char gfxEnemy01b[] PROGMEM = {
-    8, 8,
     B00011100,
     B00100010,
     B01011001,
@@ -98,7 +90,6 @@ const unsigned char gfxEnemy01b[] PROGMEM = {
 };
 
 const unsigned char gfxEnemy02a[] PROGMEM = {
-    8, 8,
     B00100100,
     B01011010,
     B10000001,
@@ -110,7 +101,6 @@ const unsigned char gfxEnemy02a[] PROGMEM = {
 };
 
 const unsigned char gfxEnemy02b[] PROGMEM = {
-    8, 8,
     B00100100,
     B01011010,
     B10100101,
@@ -122,7 +112,6 @@ const unsigned char gfxEnemy02b[] PROGMEM = {
 };
 
 const unsigned char gfxEnemy03a[] PROGMEM = {
-    8, 8,
     B01010100,
     B10101010,
     B10000001,
@@ -134,7 +123,6 @@ const unsigned char gfxEnemy03a[] PROGMEM = {
 };
 
 const unsigned char gfxEnemy03b[] PROGMEM = {
-    8, 8,
     B00101010,
     B11010101,
     B10000001,
