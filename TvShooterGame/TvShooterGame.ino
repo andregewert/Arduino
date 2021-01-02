@@ -19,7 +19,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <TvGame.h>
+#include <ArduGame_TvOut.h>
 #include <Controller/AnalogStickController.h>
 
 #include "gfx/titleScreen.h"
@@ -67,7 +67,7 @@ struct Bullet {
 
 byte gamestate = GAMESTATE_TITLE;
 byte nextGamestate = GAMESTATE_TITLE;
-TvGame game;
+ArduGame_TvOut game;
 AnalogStickController controller;
 
 Sprite player;
@@ -87,7 +87,7 @@ uint16_t playerScore = 0;
 uint8_t playerLives = 0;
 
 void setup() {
-    game = TvGame(128, 64);
+    game = ArduGame_TvOut(128, 64);
     game.begin();
     game.setFps(20);
     game.setFont(font4x6);

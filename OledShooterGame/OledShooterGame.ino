@@ -19,7 +19,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <OledGame.h>
+/**
+ * This game uses too much memory to be run on an Arduino Nano (or another AtMega 238
+ * like Uno etc.) It has been tested on Arduino Mega 2560 and Mega 2560 Pro.
+ */
+
+#include <ArduGame_SSD1306.h>
 #include <Controller/AnalogStickController.h>
 
 #include "gfx/titleScreen.h"
@@ -28,9 +33,9 @@
 #include "gfx/sprites.h"
 #include "levels/levels.h"
 
-#define MAX_SHOTS 2
-#define MAX_BULLETS 3
-#define MAX_ENEMIES 5
+#define MAX_SHOTS 5
+#define MAX_BULLETS 5
+#define MAX_ENEMIES 15
 #define MAX_LEVEL 2
 
 #define STATE_INACTIVE 0
@@ -65,7 +70,7 @@ struct Bullet {
     uint8_t state = STATE_INACTIVE;
 };
 
-OledGame game;
+ArduGame_SSD1306 game;
 AnalogStickController controller;
 
 byte gamestate = GAMESTATE_TITLE;
@@ -87,7 +92,7 @@ uint16_t playerScore = 0;
 uint8_t playerLives = 0;
 
 void setup() {
-    game = OledGame();
+    game = ArduGame_SSD1306();
     game.begin();
     game.setFps(20);
 
@@ -328,7 +333,6 @@ void loop() {
                 }
             }
 
-            /*
             // Enemy bullets
             for (i = 0; i < MAX_BULLETS; i++) {
                 if (bullets[i].state != STATE_INACTIVE) {
@@ -343,7 +347,6 @@ void loop() {
                     }
                 }
             }
-            */
 
             // Move enemies
             for (i = 0; i < MAX_ENEMIES; i++) {
@@ -365,7 +368,6 @@ void loop() {
                     }
                 }
 
-                /*
                 // Let some enemies shoot bullets
                 if (game.frameCount == 0 && enemies[i].state != STATE_INACTIVE && enemies[i].ttl == 0) {
                     if (enemies[i].id == 3) {
@@ -394,7 +396,6 @@ void loop() {
                         }
                     }
                 }
-                */
             }
 
             // Add enemies according to level map
@@ -455,7 +456,6 @@ void loop() {
                 }
             }
 
-            /*
             // Check if player is hit by enemy bullets
             for (i = 0; i < MAX_BULLETS; i++) {
                 if (bullets[i].state != STATE_INACTIVE) {
@@ -465,7 +465,6 @@ void loop() {
                     }
                 }
             }
-            */
 
             // Draw the game state
             game.clearScreen();
@@ -487,19 +486,17 @@ void loop() {
                         enemies[i].bounds.x,
                         enemies[i].bounds.y,
                         ((enemies[i].frame + game.frameCount) % 20 < 10) ? enemies[i].bitmap1 : enemies[i].bitmap2,
-                        8, 8
+                        enemies[i].bounds.width, enemies[i].bounds.height
                     );
                 }
             }
 
-            /*
             // Enemy bullets
             for (i = 0; i < MAX_BULLETS; i++) {
                 if (bullets[i].state != STATE_INACTIVE) {
                     game.drawPixel(bullets[i].position.x, bullets[i].position.y);
                 }
             }
-            */
 
             if (playerDirection == -1) {
                 game.drawBitmap(
@@ -547,6 +544,7 @@ void loop() {
 
             // Game over screen
         case GAMESTATE_GAMEOVER:
+            game.clearScreen();
             game.drawBitmap(0, 0, gameOverScreen, game.width, game.height);
             if (controller.justPressed(BUTTON_A)) {
                 nextGamestate = GAMESTATE_TITLE;
@@ -555,6 +553,7 @@ void loop() {
 
             // Game ending
         case GAMESTATE_END:
+            game.clearScreen();
             game.drawBitmap(0, 0, gameEndScreen, game.width, game.height);
             // TODO play a sweet melody endlessly
             break;
