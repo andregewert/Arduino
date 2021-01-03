@@ -90,7 +90,7 @@ void setup() {
     game = ArduGame_TvOut(128, 64);
     game.begin();
     game.setFps(20);
-    game.setFont(font4x6);
+    game.setTextSize(1);
     controller = AnalogStickController();
     controller.begin();
 
@@ -254,7 +254,6 @@ void playerHit() {
 }
 
 void drawStatusText() {
-    game.setFont(font4x6);
     game.setCursor(0, 0);
     game.display.print("Level ");
     game.display.print((int)levelCount);
@@ -461,7 +460,7 @@ void loop() {
             }
 
             // Draw the game state
-            game.clearScreen();
+            game.clear();
             drawStatusText();
             game.drawLine(0, 6, game.width -1, 6);
             game.drawLine(0, game.height -1, game.width -1, game.height -1);
@@ -514,7 +513,7 @@ void loop() {
 
         // Begin next level
         case GAMESTATE_NEXT_LEVEL:
-            game.clearScreen();
+            game.clear();
             if (levelCount < MAX_LEVEL) {
                 game.drawCenteredText(28, "Level cleared!");
                 if (game.frameCount %20 < 10) {
