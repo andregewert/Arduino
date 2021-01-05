@@ -20,7 +20,7 @@
  */
 
 /**
- * This game uses too much memory to be run on an Arduino Nano (or another AtMega 238
+ * This game uses too much memory to be run on an Arduino Nano (or another AtMega 328
  * like Uno etc.) It has been tested on Arduino Mega 2560 and Mega 2560 Pro.
  */
 
@@ -260,15 +260,15 @@ void playerHit() {
 
 void drawStatusText() {
     game.setCursor(0, 0);
-    game.display.print("Level ");
+    game.display.print("Lvl ");
     game.display.print((int)levelCount);
 
-    game.setCursor(45, 0);
-    game.display.print("Lives ");
+    game.setCursor(35, 0);
+    game.display.print("Liv ");
     game.display.print((int)playerLives);
 
-    game.setCursor(90, 0);
-    game.display.print("Score ");
+    game.setCursor(70, 0);
+    game.display.print("Scr ");
     game.display.print(playerScore);
 }
 
