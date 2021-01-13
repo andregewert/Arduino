@@ -24,12 +24,13 @@
 #include <ArduGame_U8G2.h>
 #include <Controller/AnalogStickController.h>
 
-#define TEST_FRAMES 50
+#define FPS 20
+#define TEST_FRAMES 60
 
 // Example for a SH1106 driven OLED display with 128x96 pixels; controlled via I2C
 // For other supported displays see the official documentation: https://github.com/olikraus/u8g2/wiki/u8g2setupcpp
-//U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
-U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 12, /* dc=*/ 4, /* reset=*/ 6);
+U8G2_SH1106_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
+//U8G2_SSD1306_128X64_NONAME_F_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 12, /* dc=*/ 4, /* reset=*/ 6);
 //U8G2_SSD1309_128X64_NONAME0_F_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 12, /* dc=*/ 4, /* reset=*/ 6);  
 
 ArduGame_U8G2 game;
@@ -45,7 +46,7 @@ static const unsigned char gfxPlayer[] PROGMEM = {
 void setup() {
   game = ArduGame_U8G2();
   game.begin(&u8g2);
-  game.setFps(20);
+  game.setFps(FPS);
   controller = AnalogStickController();
   controller.begin();
 }
@@ -95,6 +96,16 @@ void testBitmap() {
   game.drawBitmap(x, y, gfxPlayer, 8, 8);
 }
 
+void testFrameCounter() {
+  if (game.everyXPartOfASecond(1, 2)) {
+    game.setCursor(20, 20);
+    game.drawText("First half");
+  } else {
+    game.setCursor(40, 60);
+    game.drawText("Second half");
+  }
+}
+
 void loop() {
   if (!game.nextFrame()) return; 
   
@@ -111,6 +122,8 @@ void loop() {
       testCircle(); break;
     case 4:
       testBitmap(); break;
+    case 5:
+      testFrameCounter(); break;
   }
   game.updateDisplay();
   passes++;
@@ -118,6 +131,6 @@ void loop() {
   if (passes == TEST_FRAMES) {
     passes = 0;
     mode++;
-    if (mode > 4) mode = 0;
+    if (mode > 5) mode = 0;
   }
 }
