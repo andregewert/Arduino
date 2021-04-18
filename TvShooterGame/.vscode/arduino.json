@@ -1,8 +1,0 @@
-{
-    "board": "arduino:avr:nano",
-    "configuration": "cpu=atmega328old",
-    "programmer": "AVRISP mkII",
-    "sketch": "TvShooterGame.ino",
-    "output": "build",
-    "port": "/dev/ttyUSB0"
-}
